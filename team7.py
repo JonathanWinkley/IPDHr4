@@ -26,9 +26,29 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    turnplayed = False #Tells my code that I haven't played a turn yet
+    if len(my_history) == 0:
+        return 'c'
+        turnplayed = True #Tells my code that the bot has played a turn
+    if len(my_history) >= 3:
+        if their_history[-1] == 'b' and their_history[-2] == 'b' and their_history[-3] == 'b' and turnplayed == False: #If the other player is only betraying
+            return 'b'
+            turnplayed = True #Tells my code that the bot has played a turn
+        if their_history[-1] == 'b' and their_history[-2] == 'c' and their_history[-3] == 'b' and turnplayed == False: #If they're alternating b,c,b then I will copy their next turn
+            return 'c'
+            turnplayed = True #Tells my code that the bot has played a turn
+        if their_history[-1] == 'c' and their_history[-2] == 'b' and their_history[-3] == 'c' and turnplayed == False: #If they're alternating c,b,c then I will copy their next turn
+            return 'b'
+            turnplayed = True #Tells my code that the bot has played a turn
+        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'c' and turnplayed == False: #If they're only colluding, I will collude with them.
+            return 'c'
+            turnplayed = True #Tells my code that the bot has played a turn
+        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'b' and turnplayed == False: #If they start colluding, I will collude with them.
+            return 'c'
+            turnplayed = True
+    if turnplayed == False: #If my code never played a turn, then it will just collude instead of forgetting to play
+        return 'c'
 
-    
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
@@ -53,7 +73,7 @@ if __name__ == '__main__':
               my_score=0,
               their_score=0,
               result='b'):
-         print 'Test passed'
+         print('Test passed')
      # Test 2: Continue betraying if they collude despite being betrayed.
     test_move(my_history='bbb',
               their_history='ccc', 
