@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Seth Bercichs Team' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'Smart Collude until Betrayed'
+strategy_description = 'It will collude until betrayed. It predicts if they are going to switch from colluding to betraying and the other way around'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -26,28 +26,27 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    turnplayed = False #Tells my code that I haven't played a turn yet
-    if len(my_history) == 0:
+    if len(my_history) <= 1:
         return 'c'
-        turnplayed = True #Tells my code that the bot has played a turn
+    if len(my_history) == 2:
+        if their_history[-1] == 'b' and their_history[-2] == 'b': #If they start off betraying off the back, I will betray back.
+            return 'b'
+        else:
+            return 'c'
     if len(my_history) >= 3:
-        if their_history[-1] == 'b' and their_history[-2] == 'b' and their_history[-3] == 'b' and turnplayed == False: #If the other player is only betraying
+        if their_history[-1] == 'b' and their_history[-2] == 'b' and their_history[-3] == 'b': #If the other player is only betraying
             return 'b'
-            turnplayed = True #Tells my code that the bot has played a turn
-        if their_history[-1] == 'b' and their_history[-2] == 'c' and their_history[-3] == 'b' and turnplayed == False: #If they're alternating b,c,b then I will copy their next turn
+        if their_history[-1] == 'b' and their_history[-2] == 'c' and their_history[-3] == 'b': #If they're alternating b,c,b then I will copy their next turn
             return 'c'
-            turnplayed = True #Tells my code that the bot has played a turn
-        if their_history[-1] == 'c' and their_history[-2] == 'b' and their_history[-3] == 'c' and turnplayed == False: #If they're alternating c,b,c then I will copy their next turn
+        if their_history[-1] == 'c' and their_history[-2] == 'b' and their_history[-3] == 'c': #If they're alternating c,b,c then I will copy their next turn
             return 'b'
-            turnplayed = True #Tells my code that the bot has played a turn
-        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'c' and turnplayed == False: #If they're only colluding, I will collude with them.
+        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'c': #If they're only colluding, I will collude with them.
             return 'c'
-            turnplayed = True #Tells my code that the bot has played a turn
-        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'b' and turnplayed == False: #If they start colluding, I will collude with them.
+        if their_history[-1] == 'c' and their_history[-2] == 'c' and their_history[-3] == 'b': #If they're starting to colluding, I will collude.
             return 'c'
-            turnplayed = True
-    if turnplayed == False: #If my code never played a turn, then it will just collude instead of forgetting to play
-        return 'c'
+        if their_history[-1] == 'b' and their_history[-2] == 'b' and their_history[-3] == 'c': #If they're starting to betray, I will betray
+            return 'b'
+    return 'c'
 
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
