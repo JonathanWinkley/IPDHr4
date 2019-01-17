@@ -56,17 +56,17 @@ def test_move(my_history, their_history, my_score, their_score, result):
             " and should have returned '" + result + "'")
         return False
 
-    if __name__ == '__main__':
+if __name__ == '__main__':
      
     # Test 1: Betray on first move.
-        if test_move(my_history='',
+    if test_move(my_history='',
               their_history='', 
               my_score=0,
               their_score=0,
               result='b'):
-         print ('Test passed')
+         print 'Test passed'
      # Test 2: Continue betraying if they collude despite being betrayed.
-        test_move(my_history='bbb',
+    test_move(my_history='bbb',
               their_history='ccc', 
               # Note the scores are for testing move().
               # The history and scores don't need to match unless
