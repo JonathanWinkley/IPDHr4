@@ -7,7 +7,7 @@
 ####
 
 team_name = 'Seth Bercichs Team' # Only 10 chars displayed.
-strategy_name = 'Smart Collude until Betrayed'
+strategy_name = 'Smart Collude until Betrayed using Predictions'
 strategy_description = 'It will collude until betrayed. It predicts if they are going to switch from colluding to betraying and the other way around'
     
 def move(my_history, their_history, my_score, their_score):
