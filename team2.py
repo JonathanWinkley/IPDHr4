@@ -7,7 +7,7 @@
 ####
 
 team_name = 'Jake Halletts Team' # Only 10 chars displayed.
-strategy_name = 'collude unless betryed'
+strategy_name = 'collude untill betryed'
 strategy_description = 'collude until I am betrayed'
     
 def move(my_history, their_history, my_score, their_score):
