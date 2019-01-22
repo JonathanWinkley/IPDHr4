@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Lance Lisomdras Team' # Only 10 chars displayed. 
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'We collude till the other person betrays, then we betray'
+strategy_description = 'Collude till they betray?'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -36,10 +36,10 @@ def move(my_history, their_history, my_score, their_score):
     if their_history[-1] == 'c':
        return 'c'
       
-       if len(my_history) < 10:
+       if len(my_history) < 15:
            return 'c'
-       elif len(my_history) < 20:
-           return 'b'
+       elif len(my_history) < 25:
+           return 'c'
        elif their_history[-1] == 'b':
            return 'b'
        else:
