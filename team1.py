@@ -7,7 +7,7 @@
 ####
 
 team_name = 'Phuc Nguyens Team' # Only 10 chars displayed.
-strategy_name = '50/50'
+strategy_name = 'betray then alternate between collude and betray'
 strategy_description = 'collude when number of round is divisible to 2, other round is betray'
     
 def move(my_history, their_history, my_score, their_score):
