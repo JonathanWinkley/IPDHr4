@@ -32,7 +32,7 @@ def move(my_history, their_history, my_score, their_score):
     
     if len(my_history)==0:
         return 'c'
-    elif 'b' in their_history[-5:] or len(their_history)>199:
+    elif 'b' in their_history or len(their_history)>199:
         return 'b'
     elif 'b' in their_history[-5:]:
         return 'b'
